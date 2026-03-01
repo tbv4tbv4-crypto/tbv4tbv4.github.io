@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TBV4 & Basquete</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+
+header {
+  background: linear-gradient(to right, orange, red);
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+button {
+  background: #222;
+  color: white;
+  border: 2px solid orange;
+  padding: 15px 25px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: orange;
+  color: black;
+  transform: scale(1.05);
+}
+
+.tela {
+  display: none;
+  padding: 20px;
+}
+
+#menu {
+  display: block;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255,140,0,0.4);
+}
+
+iframe {
+  border-radius: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🔥 TBV4 & Basquete do Thomaz 🔥
+</header>
+
+<!-- MENU -->
+<div id="menu">
+  <h2>Escolha uma área</h2>
+  <button onclick="mostrar('basquete')">🏀 Basquete</button>
+  <button onclick="mostrar('treinos')">💪 Treinos</button>
+  <button onclick="mostrar('tbv4')">🎮 Canal TBV4</button>
+  <button onclick="mostrar('sobre')">ℹ️ Sobre Mim</button>
+</div>
+
+<!-- BASQUETE -->
+<div id="basquete" class="tela">
+  <h2>🏀 Desafio de Arremesso</h2>
+  <p>Pontos: <span id="pontos">0</span></p>
+  <button onclick="arremessar()">Arremessar</button>
+  <br><br>
+  <button onclick="voltar()">Voltar</button>
+</div>
+
+<!-- TREINOS -->
+<div id="treinos" class="tela">
+  <h2>💪 Meus Treinos</h2>
+  <div class="card">
+    <p>🔥 Vídeo motivacional</p>
+    <iframe width="300" height="200"
+    src="https://www.youtube.com/embed/LAr6oAKieHk"
+    allowfullscreen></iframe>
+  </div>
+  <button onclick="voltar()">Voltar</button>
+</div>
+
+<!-- TBV4 -->
+<div id="tbv4" class="tela">
+  <h2>🎮 Canal TBV4</h2>
+
+  <div class="card">
+    <p>Vídeo 1</p>
+    <iframe width="300" height="200"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    allowfullscreen></iframe>
+  </div>
+
+  <div class="card">
+    <p>Vídeo 2</p>
+    <iframe width="300" height="200"
+    src="https://www.youtube.com/embed/LAr6oAKieHk"
+    allowfullscreen></iframe>
+  </div>
+
+  <button onclick="voltar()">Voltar</button>
+</div>
+
+<!-- SOBRE -->
+<div id="sobre" class="tela">
+  <h2>ℹ️ Sobre Mim</h2>
+  <div class="card">
+    <p>🏀 Jogador de basquete</p>
+    <p>🎮 Criador do canal TBV4</p>
+    <p>🔥 Futuro engenheiro mecânico</p>
+  </div>
+  <button onclick="voltar()">Voltar</button>
+</div>
+
+<script>
+let pontos = 0;
+
+function mostrar(tela) {
+  document.getElementById("menu").style.display = "none";
+  document.querySelectorAll(".tela").forEach(div => div.style.display = "none");
+  document.getElementById(tela).style.display = "block";
+}
+
+function voltar() {
+  document.getElementById("menu").style.display = "block";
+  document.querySelectorAll(".tela").forEach(div => div.style.display = "none");
+}
+
+function arremessar() {
+  if (Math.random() > 0.5) {
+    pontos += 2;
+  }
+  document.getElementById("pontos").innerText = pontos;
+}
+</script>
+
+</body>
+</html>
