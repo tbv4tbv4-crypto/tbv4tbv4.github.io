@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TBV4 Oficial</title>
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:black;
+  color:white;
+  overflow:hidden;
+  height:100vh;
+  text-align:center;
+}
+
+/* Fundo galáxia */
+body::before {
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:url("https://i.imgur.com/k7lFr8Q.jpg") repeat;
+  background-size:cover;
+  z-index:-1;
+  animation:galaxi 60s linear infinite;
+}
+@keyframes galaxi {
+  0% {transform:translate(0,0);}
+  100% {transform:translate(-2000px,0);}
+}
+
+header{
+  margin-top:50px;
+}
+
+.menu-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+button{
+  background:red;
+  border:none;
+  padding:15px 35px;
+  font-size:16px;
+  color:white;
+  border-radius:40px;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 0 20px red;
+}
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 40px red;
+}
+
+.section{display:none; padding:20px;}
+.card{
+  background: rgba(255,255,255,0.1);
+  padding:20px;
+  margin:20px auto;
+  max-width:500px;
+  border-radius:20px;
+}
+iframe{
+  width:100%;
+  height:220px;
+  border-radius:15px;
+}
+
+/* Bola animada */
+#bola{
+  position:absolute;
+  font-size:50px;
+  cursor:pointer;
+  user-select:none;
+  z-index:1000;
+}
+.explode{
+  animation:explode 0.5s forwards;
+}
+@keyframes explode{
+  0% {transform:scale(1); opacity:1;}
+  50% {transform:scale(3); opacity:0.8;}
+  100% {transform:scale(0); opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🌌 TBV4 🌌</h1>
+<button onclick="mostrarMenu()">Conheça o TBV4</button>
+</header>
+
+<div id="menu" class="section">
+  <div class="menu-buttons">
+    <button onclick="mostrar('pessoas')">Thomaz & Eduardo</button>
+    <button onclick="mostrar('videos')">Vídeos</button>
+    <button onclick="mostrar('lugares')">Lugares</button>
+  </div>
+  <br>
+  <button onclick="voltarHeader()">Voltar</button>
+</div>
+
+<div id="pessoas" class="section">
+  <h2>👑 Conheça os jogadores</h2>
+  <div class="card">
+    <h3>Eduardo</h3>
+    <p>Eduardo é um cara que joga basquete desde pequeno, então já tem aquela base forte: sabe se posicionar, entende o jogo e tem vivência de quadra. Sendo pardo e morando no Itaim Paulista, ele carrega a identidade da quebrada e provavelmente aprendeu a jogar muito na raça, em quadra de escola ou de bairro. Deve ser aquele tipo de jogador que não desiste fácil e gosta de competir.</p>
+  </div>
+  <div class="card">
+    <h3>Thomaz</h3>
+    <p>Thomaz também joga basquete desde pequeno, então tem bastante experiência e visão de jogo. Branco e morador do Itaim Paulista, ele cresceu no mesmo ambiente, desenvolvendo habilidade na quadra e criando laços através do esporte. Provavelmente é focado, estratégico e gosta de evoluir sempre — alguém que não joga só por jogar, mas quer melhorar de verdade.</p>
+  </div>
+  <button onclick="voltarMenu()">Voltar</button>
+</div>
+
+<div id="videos" class="section">
+  <h2>🎥 Vídeos</h2>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/CRlD6ppqmSw"></iframe>
+    <p>Desafio insano no basquete!</p>
+  </div>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/xnQc-dNjq6Q"></iframe>
+    <p>Momento épico no TBV4!</p>
+  </div>
+  <div class="card">
+    <iframe src="https://www.youtube.com/embed/9Gi8REpXZx8"></iframe>
+    <p>Treino pesado e muita adrenalina!</p>
+  </div>
+  <button onclick="voltarMenu()">Voltar</button>
+</div>
+
+<div id="lugares" class="section">
+<h2>📍 Lugares que já fomos</h2>
+<p>Quadras, praças e desafios por toda parte!</p>
+<button onclick="voltarMenu()">Voltar</button>
+</div>
+
+<div id="bola">🏀</div>
+
+<script>
+function mostrarMenu(){
+  document.querySelector("header").style.display="none";
+  document.getElementById("menu").style.display="block";
+}
+function mostrar(sec){
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  document.getElementById(sec).style.display="block";
+}
+function voltarMenu(){
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  document.getElementById("menu").style.display="block";
+}
+function voltarHeader(){
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  document.querySelector("header").style.display="block";
+}
+
+/* Bola aleatória */
+const bola=document.getElementById("bola");
+let posX=Math.random()*window.innerWidth;
+let posY=Math.random()*window.innerHeight;
+bola.style.left=posX+"px";
+bola.style.top=posY+"px";
+
+function moverBola(){
+  posX+= (Math.random()-0.5)*8;
+  posY+= (Math.random()-0.5)*8;
+  if(posX<0) posX=0;
+  if(posX>window.innerWidth-50) posX=window.innerWidth-50;
+  if(posY<0) posY=0;
+  if(posY>window.innerHeight-50) posY=window.innerHeight-50;
+  bola.style.left=posX+"px";
+  bola.style.top=posY+"px";
+  requestAnimationFrame(moverBola);
+}
+moverBola();
+
+/* Explosão ao clicar */
+bola.addEventListener("click",()=>{
+  bola.classList.add("explode");
+  setTimeout(()=>bola.classList.remove("explode"),500);
+});
+</script>
+</body>
+  </html>
